@@ -5,10 +5,13 @@ This repository contains files and scripts for the **Beacon Dataset**, a natural
 ## Dataset Description
 
 ### Intersections
-- **Walnut Grove-Goodlett**
+
+![satellite_view](https://github.com/user-attachments/assets/5ac3c5a7-58bf-4adf-a412-9f03f7d1872e)
+
+- **[Walnut Grove-Goodlett](https://maps.app.goo.gl/Evvxe3cxLwy3p9fd6)**
   - Noon (12:00 PM - 1:00 PM)
   - Afternoon (5:00 PM - 6:00 PM)
-- **Walnut Grove-Mendenhall**
+- **[Walnut Grove-Mendenhall](https://maps.app.goo.gl/WJp31i2NYdrc1WCT8)**
   - Noon (12:00 PM - 1:00 PM)
   - Afternoon (5:00 PM - 6:00 PM)
 
