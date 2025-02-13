@@ -1,4 +1,3 @@
-
 import os
 import sys
 from optparse import OptionParser
@@ -10,9 +9,15 @@ from parse_output import parse_output, calculate_offset
 
 
 base_path = 'C:/Users/ssarker8/Desktop/beacon/beacon_dataset/' 
+output_file = os.path.join(base_path, "output")
+
+# ensure valid output directory
+if not os.path.exists(output_file):
+    os.makedirs(output_file)
+
+
 used_file = 'WGM_AN.csv' 
 # dataset_name = 'raw_data/GWG_AN.csv'
-output_file = "C:/Users/ssarker8/Desktop/beacon/beacon_dataset/output/"
 # dataset_name = 'raw_data/WGM_N.csv' 
 dataset_name = 'raw_data/WGM_AN.csv'
 # dataset_name = 'raw_data/GWG_N.csv' 
@@ -22,17 +27,13 @@ base_dataset_name = os.path.splitext(os.path.basename(dataset_name))[0]
 result_df = data_process.process_data(base_path, dataset_name) #direct call to process data then use it
 result_df_unique_veh_ids = result_df['veh_id'].nunique()
 
-# output_xml = f"{base_dataset_name}_output.xml" 
-# output_xml = "intersection_4_output.xml"
+
 output_xml = f"{base_dataset_name}_output.xml"
+
+
 output_file_path = os.path.join(output_file, output_xml)
-# # output_file_path = os.path.join(base_path, output_xml)
-# print(f'P{output_file_path}')
 
 
-##############################################  
-parse_df = parse_output(output_file_path)
-offset_df = calculate_offset(parse_df, dataset_name)
 
 ##############################################
 
@@ -197,17 +198,18 @@ if __name__ == '__main__':
     print("Starting SUMO")
     simulation_results = run(result_df)
     print(simulation_results)
+
+    # parse the output file after simulation has completed
+    parse_df = parse_output(full_output_path)
+    offset_df = calculate_offset(parse_df, dataset_name)
+
+
     base_name = used_file.replace('.csv', '')
-    save_dir = 'C:/Users/ssarker8/Desktop/beacon/beacon_dataset/output/'
+    save_dir = os.path.join(base_path, 'output')
     new_file_name = f"{base_name}_simulation_results.csv"
     save_path = os.path.join(save_dir, new_file_name)
     # save_path = '/home/tvillarr/Supriya/output/simulation_results.csv'
     simulation_results.to_csv(save_path, index=False)
     print(f"Simulation results saved to {save_path}")
-
-
-
-
-
 
 
